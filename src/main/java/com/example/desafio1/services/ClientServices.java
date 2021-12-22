@@ -12,18 +12,16 @@ public class ClientServices {
     private ClientRepository _clientRepository; // Via construtor
 
     @Autowired
-    public ClientServices( ClientRepository clientRepository){ // Via construtor
+    public ClientServices(ClientRepository clientRepository) { // Via construtor
         _clientRepository = clientRepository;
     }
 
-    public void salvarCliente(Cliente cliente){
+    public void salvarCliente(Cliente cliente) {
         validarCliente(cliente);
         _clientRepository.save(cliente);
     }
 
-    private void validarCliente(Cliente cliente){
-        if (cliente == null)
-            throw new BeanDefinitionValidationException("Client Null");
-
+    private void validarCliente(Cliente cliente) {
+        if (cliente == null) throw new BeanDefinitionValidationException("Client Null");
     }
 }
