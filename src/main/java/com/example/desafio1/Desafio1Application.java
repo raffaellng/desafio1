@@ -1,5 +1,7 @@
 package com.example.desafio1;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class Desafio1Application {
 
-	@GetMapping("/hello")
-	public String helloWord(){
-		return "hello world";
-	}
-	public static void main(String[] args) {
-		SpringApplication.run(Desafio1Application.class, args);
-	}
+    @Autowired
+    @Qualifier("applicationName")
+    private String applicationName; //aqui está utilizando o Bean, que está os dados do arquivo config (get; set), e bem parecido com o interface do C#
+
+    @GetMapping("/hello")
+    public String helloWord() {
+        return "Hello Word";
+    }
+
+    @GetMapping("/hello-configuration")
+    public String printConfigurtations() {
+        return applicationName;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Desafio1Application.class, args);
+    }
 
 }
