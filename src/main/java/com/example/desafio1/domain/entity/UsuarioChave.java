@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Usuario_Chave")
 public class UsuarioChave {
 
     @Id
@@ -31,6 +32,7 @@ public class UsuarioChave {
     @JoinColumn(name = "IdChaves")
     private Chaves idChave;
 
+    private String chave;
     private boolean status;
     private LocalDateTime dataEnvio;
 

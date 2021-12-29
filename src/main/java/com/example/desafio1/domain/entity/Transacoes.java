@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -20,7 +21,7 @@ public class Transacoes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String chaveTransacao;
+    private UUID chaveTransacao;
     private BigDecimal valor;
     private LocalDateTime dataTransacao;
 

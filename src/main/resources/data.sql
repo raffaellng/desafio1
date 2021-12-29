@@ -8,19 +8,6 @@ CREATE TABLE Cliente(
     DataAlteracao TIMESTAMP
 );
 
-CREATE TABLE Endereco (
-    Id INTEGER PRIMARY KEY,
-    IdCliente INTEGER REFERENCES Cliente(Id),
-    Rua VARCHAR(100),
-    Numero INTEGER,
-    Complemento VARCHAR(20),
-    CEP INTEGER,
-    Estado VARCHAR(2),
-    Pais varchar(20),
-    DataCriacao TIMESTAMP,
-    DataAlteracao TIMESTAMP
-);
-
 CREATE TABLE Banco(
     Id INTEGER PRIMARY KEY,
     IdCliente INTEGER REFERENCES Cliente(Id),
@@ -39,25 +26,26 @@ CREATE TABLE Banco(
 CREATE TABLE Chaves(
     Id INTEGER PRIMARY KEY,
     TipoChave varchar(50),
-    Descricao varchar(100),
+    Descricao varchar(200),
     DataCriacao TIMESTAMP,
     Status BIT
 );
 
-CREATE TABLE UsuarioChave(
+CREATE TABLE Usuario_Chave(
     id INTEGER PRIMARY KEY,
     IdCliente INTEGER REFERENCES Cliente(Id),
     IdBanco INTEGER REFERENCES Banco(Id),
     IdChaves INTEGER REFERENCES Chaves(Id),
+    Chave VARCHAR (100),
     Status bit,
     DataCriacao TIMESTAMP
 );
 
 CREATE TABLE Transacoes(
     Id INTEGER PRIMARY KEY,
-    ChaveTrasacao varchar(max),
+    ChaveTrasacao VARCHAR(MAX),
     Valor integer (8),
     DataTransacao TIMESTAMP,
-    UsuarioOrigem INTEGER REFERENCES UsuarioChave(id),
-    UsuarioDestino INTEGER REFERENCES UsuarioChave(id)
+    UsuarioOrigem INTEGER REFERENCES Usuario_Chave(id),
+    UsuarioDestino INTEGER REFERENCES Usuario_Chave(id)
 );

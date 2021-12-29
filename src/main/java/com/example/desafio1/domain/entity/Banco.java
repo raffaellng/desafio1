@@ -27,8 +27,8 @@ public class Banco implements Serializable {
 
     private String instituicao;
     private String tipoConta;
-    private String agencia;
-    private String conta;
+    private int agencia;
+    private int conta;
     private BigDecimal saldo;
     private String usuario;
     private String senha;
