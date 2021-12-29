@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -24,9 +25,20 @@ public class Endereco {
 
     private String rua;
     private int numero;
+    private String complemento;
     private int cep;
     private String estado;
     private String pais;
-    private String dataCriacao;
-    private String dataAlteracao;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataAlteracao;
+
+    @PrePersist
+    public void prePersist() {
+        dataCriacao = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        dataAlteracao = LocalDateTime.now();
+    }
 }

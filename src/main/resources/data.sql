@@ -24,11 +24,11 @@ CREATE TABLE Endereco (
 CREATE TABLE Banco(
     Id INTEGER PRIMARY KEY,
     IdCliente INTEGER REFERENCES Cliente(Id),
+    Instituicao varchar(100),
     TipoConta varchar(10),
     Agencia INTEGER(4),
     Conta INTEGER(8),
     Saldo INTEGER(8),
-    TipoChave VARCHAR(50),
     Usuario varchar(50),
     Senha VARCHAR(max),
     status BIT,
@@ -45,12 +45,12 @@ CREATE TABLE Chaves(
 );
 
 CREATE TABLE UsuarioChave(
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY,
     IdCliente INTEGER REFERENCES Cliente(Id),
     IdBanco INTEGER REFERENCES Banco(Id),
     IdChaves INTEGER REFERENCES Chaves(Id),
     Status bit,
-    DataEnvio TIMESTAMP
+    DataCriacao TIMESTAMP
 );
 
 CREATE TABLE Transacoes(
@@ -58,5 +58,6 @@ CREATE TABLE Transacoes(
     ChaveTrasacao varchar(max),
     Valor integer (8),
     DataTransacao TIMESTAMP,
-    IdUsuarioChave INTEGER REFERENCES UsuarioChave(id)
+    UsuarioOrigem INTEGER REFERENCES UsuarioChave(id),
+    UsuarioDestino INTEGER REFERENCES UsuarioChave(id)
 );

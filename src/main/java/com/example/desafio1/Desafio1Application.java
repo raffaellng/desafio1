@@ -16,12 +16,15 @@ public class Desafio1Application {
     @Bean
     public CommandLineRunner init(@Autowired ClientesRepository clientesRepository) {
         return args -> {
+            //CLIENTE
             Cliente cliente = new Cliente();
             cliente.setNome("Raffaell Negreiros");
+            cliente.setCpf("122.256.166-20");
+            cliente.setDataNascimento("18-10-1993 00:00:00");
+            cliente.setEmail("Raffaell@gmail.com");
             clientesRepository.save(cliente);
-            Cliente client2e = new Cliente();
-            client2e.setNome("Gugu Negreiros");
-            clientesRepository.save(client2e);
+
+            //ENDERECO
         };
     }
 
