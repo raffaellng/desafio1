@@ -1,105 +1,38 @@
 package com.example.desafio1.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Banco {
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "Banco")
+public class Banco implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
+
+    @ManyToOne
+    @JoinColumn(name = "IdCliente")
     private Cliente cliente;
-    private String tipoBanco;
-    private String Agencia;
-    private String Conta;
-    private BigDecimal Saldo;
-    private boolean Status;
-    private String Usuario;
-    private String Senha;
-    private String DataCriacao;
-    private String DataAlteracao;
 
-    public int getId() {
-        return Id;
-    }
+    private String tipoConta;
+    private String agencia;
+    private String conta;
+    private BigDecimal saldo;
+    private String tipoChave;
+    private String usuario;
+    private String senha;
+    private boolean status;
+    private String dataCriacao;
+    private String dataAlteracao;
 
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getTipoBanco() {
-        return tipoBanco;
-    }
-
-    public void setTipoBanco(String tipoBanco) {
-        this.tipoBanco = tipoBanco;
-    }
-
-    public String getAgencia() {
-        return Agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        Agencia = agencia;
-    }
-
-    public String getConta() {
-        return Conta;
-    }
-
-    public void setConta(String conta) {
-        Conta = conta;
-    }
-
-    public BigDecimal getSaldo() {
-        return Saldo;
-    }
-
-    public void setSaldo(BigDecimal saldo) {
-        Saldo = saldo;
-    }
-
-    public boolean isStatus() {
-        return Status;
-    }
-
-    public void setStatus(boolean status) {
-        Status = status;
-    }
-
-    public String getUsuario() {
-        return Usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        Usuario = usuario;
-    }
-
-    public String getSenha() {
-        return Senha;
-    }
-
-    public void setSenha(String senha) {
-        Senha = senha;
-    }
-
-    public String getDataCriacao() {
-        return DataCriacao;
-    }
-
-    public void setDataCriacao(String dataCriacao) {
-        DataCriacao = dataCriacao;
-    }
-
-    public String getDataAlteracao() {
-        return DataAlteracao;
-    }
-
-    public void setDataAlteracao(String dataAlteracao) {
-        DataAlteracao = dataAlteracao;
-    }
 }
