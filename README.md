@@ -18,3 +18,8 @@ Commitar todo dia o que tem feito no projeto para acompanhamento.\
 Escolher um design pattern que será implementado na solução 
 
 # design pattern
+
+
+# Docker
+docker run --name desafio-db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=desafio1 -p 5432:5432 -d postgres
+
