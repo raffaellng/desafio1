@@ -6,12 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Usuario_Chave")
 public class UsuarioChave {
 
     @Id
@@ -30,7 +32,12 @@ public class UsuarioChave {
     @JoinColumn(name = "IdChaves")
     private Chaves idChave;
 
+    private String chave;
     private boolean status;
-    private String dataEnvio;
+    private LocalDateTime dataEnvio;
 
+    @PrePersist
+    public void prePersist() {
+        dataEnvio = LocalDateTime.now();
+    }
 }

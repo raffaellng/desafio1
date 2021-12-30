@@ -1,11 +1,10 @@
 package com.example.desafio1.domain.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -19,13 +18,31 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NonNull
     @Column(name = "NomeCliente")
     private String nome;
 
+    @NonNull
     private String cpf;
+
+    @NonNull
     private String dataNascimento;
+
+    @NonNull
     private String email;
-    private String dataCriacao;
-    private String dataAlteracao;
+
+    private LocalDateTime dataCriacao;
+
+    private LocalDateTime dataAlteracao;
+
+    @PrePersist
+    public void prePersist() {
+        dataCriacao = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        dataAlteracao = LocalDateTime.now();
+    }
 
 }

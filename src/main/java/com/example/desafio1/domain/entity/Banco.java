@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -24,15 +26,25 @@ public class Banco implements Serializable {
     @JoinColumn(name = "IdCliente")
     private Cliente cliente;
 
+    private String instituicao;
     private String tipoConta;
-    private String agencia;
-    private String conta;
+    private int agencia;
+    private int conta;
     private BigDecimal saldo;
-    private String tipoChave;
     private String usuario;
     private String senha;
     private boolean status;
-    private String dataCriacao;
-    private String dataAlteracao;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataAlteracao;
+
+    @PrePersist
+    public void prePersist() {
+        dataCriacao = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        dataAlteracao = LocalDateTime.now();
+    }
 
 }

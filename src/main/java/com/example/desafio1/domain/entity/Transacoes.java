@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,13 +22,22 @@ public class Transacoes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "IdCliente")
-    private Cliente cliente;
-
-    private String chaveTransacao;
+    private UUID chaveTransacao;
     private BigDecimal valor;
-    private String dataTransacao;
-    private String dataCriacao;
-    private String dataAlteracao;
+    private LocalDateTime dataTransacao;
+
+    @ManyToOne
+    @JoinColumn(name = "UsuarioChaveOrigem")
+    private UsuarioChave UsuarioOrigem;
+
+
+    @ManyToOne
+    @JoinColumn(name = "UsuarioChaveDestino")
+    private UsuarioChave UsuarioDestino;
+
+    @PrePersist
+    public void prePersist() {
+        dataTransacao = LocalDateTime.now();
+    }
+
 }

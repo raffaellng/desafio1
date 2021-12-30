@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,6 +22,11 @@ public class Chaves {
 
     private String tipoChave;
     private String descricao;
-    private String dataCriacao;
-    private String dataAlteracao;
+    private LocalDateTime dataCriacao;
+    private boolean status;
+
+    @PrePersist
+    public void prePersist() {
+        dataCriacao = LocalDateTime.now();
+    }
 }
