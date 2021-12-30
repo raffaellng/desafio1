@@ -25,7 +25,6 @@ public class Desafio1Application {
         return args -> {
             //CLIENTE
             Cliente cliente = new Cliente();
-            cliente.setId(1);
             cliente.setNome("Raffaell Negreiros");
             cliente.setCpf("122.222.222.00");
             cliente.setDataNascimento("18-10-1993 00:00:00");
@@ -33,12 +32,11 @@ public class Desafio1Application {
             clientesRepository.save(cliente);
 
             Cliente cliente2 = new Cliente();
-            cliente2.setId(1);
             cliente2.setNome("Gustavo Negreiros");
             cliente2.setCpf("122.222.222.01");
             cliente2.setDataNascimento("04-01-1995 00:00:00");
             cliente2.setEmail("gustavo@gmail.com");
-            clientesRepository.save(cliente);
+            clientesRepository.save(cliente2);
 
             //BANCO
             Banco banco = new Banco();
@@ -54,7 +52,7 @@ public class Desafio1Application {
             bancoRepository.save(banco);
 
             Banco banco1 = new Banco();
-            banco1.setCliente(cliente);
+            banco1.setCliente(cliente2);
             banco1.setInstituicao("banco 2");
             banco1.setAgencia(2444);
             banco1.setConta(123456789);

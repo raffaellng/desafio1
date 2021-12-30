@@ -18,17 +18,17 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NonNull
+    //@NonNull
     @Column(name = "NomeCliente")
     private String nome;
 
-    @NonNull
+    //@NonNull
     private String cpf;
 
-    @NonNull
+    //@NonNull
     private String dataNascimento;
 
-    @NonNull
+    //@NonNull
     private String email;
 
     private LocalDateTime dataCriacao;
