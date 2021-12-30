@@ -2,7 +2,6 @@ package com.example.desafio1;
 
 import com.example.desafio1.domain.entity.*;
 import com.example.desafio1.domain.repository.*;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
