@@ -32,6 +32,8 @@ public class Cliente implements Serializable {
     @NotNull
     private String email;
 
+    private boolean status = true;
+
     private LocalDateTime dataCriacao;
 
     private LocalDateTime dataAlteracao;
