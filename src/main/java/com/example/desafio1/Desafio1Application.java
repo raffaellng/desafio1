@@ -26,14 +26,14 @@ public class Desafio1Application {
             //CLIENTE
             Cliente cliente = new Cliente();
             cliente.setNome("Raffaell Negreiros");
-            cliente.setCpf("122.222.222.00");
+            cliente.setCpf("12222222200");
             cliente.setDataNascimento("18-10-1993 00:00:00");
             cliente.setEmail("raffaell@gmail.com");
             clientesRepository.save(cliente);
 
             Cliente cliente2 = new Cliente();
             cliente2.setNome("Gustavo Negreiros");
-            cliente2.setCpf("122.222.222.01");
+            cliente2.setCpf("12222222201");
             cliente2.setDataNascimento("04-01-1995 00:00:00");
             cliente2.setEmail("gustavo@gmail.com");
             clientesRepository.save(cliente2);
@@ -107,7 +107,7 @@ public class Desafio1Application {
             usuarioChave1.setIdCliente(cliente2);
             usuarioChave1.setIdBanco(banco1);
             usuarioChave1.setIdChave(chaves1);
-            usuarioChave1.setChave("122.222.222-01");
+            usuarioChave1.setChave("12222222201");
             usuarioChave1.setStatus(true);
             usuarioChaveRepository.save(usuarioChave1);
 
