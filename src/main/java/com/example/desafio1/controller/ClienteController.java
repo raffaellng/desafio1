@@ -3,6 +3,7 @@ package com.example.desafio1.controller;
 import com.example.desafio1.domain.entity.Cliente;
 import com.example.desafio1.domain.repository.ClientesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class ClienteController {
         if (cliente.isPresent())
             return ResponseEntity.ok(cliente.get());
 
-        return  ResponseEntity.notFound().build();
+        return new ResponseEntity<Cliente>(HttpStatus.NOT_FOUND);
     }
 
 }
