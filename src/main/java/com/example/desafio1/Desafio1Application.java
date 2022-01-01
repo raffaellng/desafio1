@@ -25,20 +25,18 @@ public class Desafio1Application {
         return args -> {
             //CLIENTE
             Cliente cliente = new Cliente();
-            cliente.setId(1);
             cliente.setNome("Raffaell Negreiros");
-            cliente.setCpf("122.222.222.00");
+            cliente.setCpf("12222222200");
             cliente.setDataNascimento("18-10-1993 00:00:00");
             cliente.setEmail("raffaell@gmail.com");
             clientesRepository.save(cliente);
 
             Cliente cliente2 = new Cliente();
-            cliente2.setId(1);
             cliente2.setNome("Gustavo Negreiros");
-            cliente2.setCpf("122.222.222.01");
+            cliente2.setCpf("12222222201");
             cliente2.setDataNascimento("04-01-1995 00:00:00");
             cliente2.setEmail("gustavo@gmail.com");
-            clientesRepository.save(cliente);
+            clientesRepository.save(cliente2);
 
             //BANCO
             Banco banco = new Banco();
@@ -54,7 +52,7 @@ public class Desafio1Application {
             bancoRepository.save(banco);
 
             Banco banco1 = new Banco();
-            banco1.setCliente(cliente);
+            banco1.setCliente(cliente2);
             banco1.setInstituicao("banco 2");
             banco1.setAgencia(2444);
             banco1.setConta(123456789);
@@ -109,7 +107,7 @@ public class Desafio1Application {
             usuarioChave1.setIdCliente(cliente2);
             usuarioChave1.setIdBanco(banco1);
             usuarioChave1.setIdChave(chaves1);
-            usuarioChave1.setChave("122.222.222-01");
+            usuarioChave1.setChave("12222222201");
             usuarioChave1.setStatus(true);
             usuarioChaveRepository.save(usuarioChave1);
 
@@ -121,6 +119,22 @@ public class Desafio1Application {
             transacoes.setUsuarioDestino(usuarioChave);
             transacoes.setUsuarioOrigem(usuarioChave1);
             transacoesRepository.save(transacoes);
+
+            Transacoes transacoes1 = new Transacoes();
+            UUID temp1 = UUID.randomUUID();
+            transacoes1.setChaveTransacao(temp1);
+            transacoes1.setValor(BigDecimal.valueOf(100.00));
+            transacoes1.setUsuarioDestino(usuarioChave);
+            transacoes1.setUsuarioOrigem(usuarioChave1);
+            transacoesRepository.save(transacoes1);
+
+            Transacoes transacoes2 = new Transacoes();
+            UUID temp2 = UUID.randomUUID();
+            transacoes2.setChaveTransacao(temp2);
+            transacoes2.setValor(BigDecimal.valueOf(150.00));
+            transacoes2.setUsuarioDestino(usuarioChave1);
+            transacoes2.setUsuarioOrigem(usuarioChave);
+            transacoesRepository.save(transacoes2);
 
         };
     }

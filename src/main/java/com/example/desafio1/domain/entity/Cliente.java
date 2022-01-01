@@ -1,5 +1,6 @@
 package com.example.desafio1.domain.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,18 +19,20 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NonNull
+    @NotNull
     @Column(name = "NomeCliente")
     private String nome;
 
-    @NonNull
+    @NotNull
     private String cpf;
 
-    @NonNull
+    @NotNull
     private String dataNascimento;
 
-    @NonNull
+    @NotNull
     private String email;
+
+    private boolean status = true;
 
     private LocalDateTime dataCriacao;
 

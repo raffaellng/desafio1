@@ -28,12 +28,12 @@ public class Transacoes {
 
     @ManyToOne
     @JoinColumn(name = "UsuarioChaveOrigem")
-    private UsuarioChave UsuarioOrigem;
+    private UsuarioChave usuarioOrigem;
 
 
     @ManyToOne
     @JoinColumn(name = "UsuarioChaveDestino")
-    private UsuarioChave UsuarioDestino;
+    private UsuarioChave usuarioDestino;
 
     @PrePersist
     public void prePersist() {

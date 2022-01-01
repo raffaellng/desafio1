@@ -4,6 +4,7 @@ CREATE TABLE Cliente(
     CPF VARCHAR(14),
     DataNascimento TIMESTAMP,
     Email VARCHAR(100),
+    Status BIT,
     DataCriacao TIMESTAMP,
     DataAlteracao TIMESTAMP
 );
