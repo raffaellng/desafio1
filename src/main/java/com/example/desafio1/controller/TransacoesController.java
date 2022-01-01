@@ -1,7 +1,6 @@
 package com.example.desafio1.controller;
 
 import com.example.desafio1.domain.entity.Transacoes;
-import com.example.desafio1.domain.entity.UsuarioChave;
 import com.example.desafio1.domain.repository.TransacoesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
