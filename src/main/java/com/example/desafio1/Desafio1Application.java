@@ -120,6 +120,22 @@ public class Desafio1Application {
             transacoes.setUsuarioOrigem(usuarioChave1);
             transacoesRepository.save(transacoes);
 
+            Transacoes transacoes1 = new Transacoes();
+            UUID temp1 = UUID.randomUUID();
+            transacoes1.setChaveTransacao(temp1);
+            transacoes1.setValor(BigDecimal.valueOf(100.00));
+            transacoes1.setUsuarioDestino(usuarioChave);
+            transacoes1.setUsuarioOrigem(usuarioChave1);
+            transacoesRepository.save(transacoes1);
+
+            Transacoes transacoes2 = new Transacoes();
+            UUID temp2 = UUID.randomUUID();
+            transacoes2.setChaveTransacao(temp2);
+            transacoes2.setValor(BigDecimal.valueOf(150.00));
+            transacoes2.setUsuarioDestino(usuarioChave1);
+            transacoes2.setUsuarioOrigem(usuarioChave);
+            transacoesRepository.save(transacoes2);
+
         };
     }
 
