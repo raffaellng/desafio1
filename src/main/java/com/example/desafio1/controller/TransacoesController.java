@@ -28,8 +28,7 @@ public class TransacoesController {
     @GetMapping
     @RequestMapping(value = "/cliente/{id}")
     public List<Transacoes> transacoesByClient(@PathVariable int id) {
-        List<Transacoes> transacao = transacoesRepository.findByUsuarioOrigem_Id(id);
-        return transacao;
+        return transacoesRepository.findByUsuarioOrigem_Id(id);
     }
 
     @PostMapping

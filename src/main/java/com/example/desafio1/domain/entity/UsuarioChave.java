@@ -33,7 +33,8 @@ public class UsuarioChave {
     private Chaves idChave;
 
     private String chave;
-    private boolean status;
+    private boolean statusEnvio;
+    private String erroEnvio;
     private LocalDateTime dataEnvio;
 
     @PrePersist

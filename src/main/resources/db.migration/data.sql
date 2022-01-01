@@ -49,7 +49,8 @@ CREATE TABLE UsuarioChave(
     IdCliente INTEGER REFERENCES Cliente(Id),
     IdBanco INTEGER REFERENCES Branco(Id),
     IdChaves INTEGER REFERENCES Chave(Id),
-    Status bit,
+    StatusEnvio bit,
+    ErroEnvio varchar(max),
     DataStatus TIMESTAMP
 )
 
