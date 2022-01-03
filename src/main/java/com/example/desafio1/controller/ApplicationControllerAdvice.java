@@ -13,7 +13,7 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(RegraNegocioExceptions.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrosExceptions handleRegraException(RegraNegocioExceptions ex){
-        String mensgemErro = ex.getMessage();
-        return new ApiErrosExceptions(mensgemErro);
+        String mensagemErro = ex.getMessage();
+        return new ApiErrosExceptions(mensagemErro);
     }
 }

@@ -13,11 +13,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TransacoesGetDTO {
-    private int id;
-    private UUID chaveTransacao;
+public class TransacoesSaveDTO {
+
     private BigDecimal valor;
-    private LocalDateTime dataTransacao;
+    private String observacao;
     private UsuarioChaveDTO usuarioOrigem;
     private UsuarioChaveDTO usuarioDestino;
 }

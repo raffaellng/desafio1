@@ -25,6 +25,7 @@ public class Transacoes {
     private UUID chaveTransacao;
     private BigDecimal valor;
     private LocalDateTime dataTransacao;
+    private String observacao;
 
     @ManyToOne
     @JoinColumn(name = "UsuarioChaveOrigem")

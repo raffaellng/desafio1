@@ -5,17 +5,17 @@ import com.example.desafio1.domain.entity.Banco;
 import com.example.desafio1.domain.entity.Cliente;
 import com.example.desafio1.domain.entity.Transacoes;
 import com.example.desafio1.domain.entity.UsuarioChave;
-import com.example.desafio1.dto.BancoDTO;
-import com.example.desafio1.dto.ClienteDTO;
-import com.example.desafio1.dto.TransacoesDTO;
-import com.example.desafio1.dto.UsuarioChaveDTO;
+import com.example.desafio1.dto.*;
 import com.example.desafio1.exception.RegraNegocioExceptions;
+import com.example.desafio1.repository.BancoRepository;
+import com.example.desafio1.repository.ClientesRepository;
 import com.example.desafio1.repository.TransacoesRepository;
+import com.example.desafio1.repository.UsuarioChaveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
+import javax.transaction.Transactional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,11 +23,76 @@ import java.util.stream.Collectors;
 public class TransacoesService implements TransacoesInterface {
 
     private final TransacoesRepository transacoesRepository;
+    private final ClientesRepository clientesRepository;
+    private final UsuarioChaveRepository usuarioChaveRepository;
+    private final BancoRepository bancoRepository;
+
 
     @Override
-    public List<List<TransacoesDTO>> transacoesByClient(int id) {
+    public Optional<List<TransacoesGetDTO>> transacoesById(int id) {
+        Optional<Transacoes> transacao = transacoesRepository.findById(id);
+        return transacao.map(t -> converterTransacao(Collections.singletonList(t)));
+    }
+
+    @Override
+    @Transactional
+    public TransacoesSaveDTO saveTransacao(EnviarTransacaoDTO enviarTransacao) {
+
+        UsuarioChave existeChaveOrigem = usuarioChaveRepository.findByChave(enviarTransacao.getChaveOrigem());
+        UsuarioChave existeChaveDestino = usuarioChaveRepository.findByChave(enviarTransacao.getChaveDestino());
+
+        Banco userOrigem = bancoRepository.findById(existeChaveOrigem.getIdCliente().getId())
+                .orElseThrow(() -> new RegraNegocioExceptions("Usuario origem não existe"));
+
+        Banco userDestino = bancoRepository.findById(existeChaveDestino.getIdCliente().getId())
+                .orElseThrow(() -> new RegraNegocioExceptions("Usuario destino não existe"));
+
+        if (Objects.equals(existeChaveDestino.getIdChave().getTipoChave(), enviarTransacao.getTipoChave()))
+            throw new RegraNegocioExceptions("A chave nao corresponde ao tipo selecionado");
+
+        if (existeChaveOrigem == null || !existeChaveOrigem.isStatusChave())
+            throw new RegraNegocioExceptions("Chave de origem desativada ou não existe");
+
+        if (existeChaveDestino == null || !existeChaveDestino.isStatusChave())
+            throw new RegraNegocioExceptions("Chave de destino desativada ou não existe");
+
+        if (userOrigem.getSaldo().intValue() < enviarTransacao.getValor().intValue())
+            throw new RegraNegocioExceptions("Sem saldo suficiente");
+
+        userOrigem.setSaldo(userOrigem.getSaldo().min(enviarTransacao.getValor()));
+        SalvarSaldo(userOrigem);
+
+        userDestino.setSaldo(userDestino.getSaldo().add(enviarTransacao.getValor()));
+        SalvarSaldo(userDestino);
+
+        transacoesRepository.save(salvarTransacao(enviarTransacao, existeChaveDestino, existeChaveOrigem));
+
+        return TransacoesSaveDTO.builder()
+                .valor(enviarTransacao.getValor())
+                .observacao(enviarTransacao.getObservacao())
+                .usuarioDestino(converterUsuarioChave(existeChaveOrigem))
+                .usuarioOrigem(converterUsuarioChave(existeChaveDestino))
+                .build();
+    }
+
+    private void SalvarSaldo(Banco banco) {
+        bancoRepository.save(banco);
+    }
+
+    private Transacoes salvarTransacao(EnviarTransacaoDTO enviarTransacao, UsuarioChave existeChaveDestino, UsuarioChave existeChaveOrigem) {
+        return transacoesRepository.save(Transacoes.builder()
+                .chaveTransacao(UUID.randomUUID())
+                .valor(enviarTransacao.getValor())
+                .observacao(enviarTransacao.getObservacao())
+                .usuarioOrigem(existeChaveOrigem)
+                .usuarioDestino(existeChaveDestino)
+                .build());
+    }
+
+    @Override
+    public List<List<TransacoesGetDTO>> transacoesByClient(int id) {
         try {
-            List<List<TransacoesDTO>> transacoes = transacoesRepository
+            List<List<TransacoesGetDTO>> transacoes = transacoesRepository
                     .findByUsuarioOrigem_Id(id)
                     .stream()
                     .map(
@@ -39,18 +104,18 @@ public class TransacoesService implements TransacoesInterface {
                 throw new RegraNegocioExceptions("Usuario origem nao existe");
 
             return transacoes;
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
     }
 
-    private List<TransacoesDTO> converterTransacao(List<Transacoes> transacoes) {
-        return transacoes.stream().map(t -> TransacoesDTO
+    private List<TransacoesGetDTO> converterTransacao(List<Transacoes> transacoes) {
+        return transacoes.stream().map(t -> TransacoesGetDTO
                 .builder()
                 .id(t.getId())
                 .chaveTransacao(t.getChaveTransacao())
                 .valor(t.getValor())
+                .observacao(t.getObservacao())
                 .dataTransacao(t.getDataTransacao())
                 .usuarioOrigem(converterUsuarioChave(t.getUsuarioOrigem()))
                 .usuarioDestino(converterUsuarioChave(t.getUsuarioDestino()))
@@ -64,7 +129,7 @@ public class TransacoesService implements TransacoesInterface {
                 .cliente(converterCliente(usuarioChave.getIdCliente()))
                 .banco(converterBanco(usuarioChave.getIdBanco()))
                 .chave(usuarioChave.getChave())
-                .statusEnvio(usuarioChave.isStatusEnvio())
+                .statusEnvio(usuarioChave.isStatusChave())
                 .dataEnvio(usuarioChave.getDataEnvio())
                 .build();
     }
@@ -86,4 +151,6 @@ public class TransacoesService implements TransacoesInterface {
                 .email(cliente.getEmail())
                 .build();
     }
+
+
 }

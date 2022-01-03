@@ -9,9 +9,9 @@ import java.util.List;
 public class ApiErrosExceptions {
 
     @Getter
-    private List<String> errors;
+    private final List<String> errors;
 
     public ApiErrosExceptions(String mensagemErros){
-        this.errors = Arrays.asList(mensagemErros);
+        this.errors = List.of(mensagemErros);
     }
 }

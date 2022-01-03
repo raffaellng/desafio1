@@ -100,7 +100,7 @@ public class Desafio1Application {
             usuarioChave.setIdBanco(banco);
             usuarioChave.setIdChave(chaves4);
             usuarioChave.setChave("34996399990");
-            usuarioChave.setStatusEnvio(true);
+            usuarioChave.isStatusChave();
             usuarioChaveRepository.save(usuarioChave);
 
             UsuarioChave usuarioChave1 = new UsuarioChave();
@@ -108,7 +108,7 @@ public class Desafio1Application {
             usuarioChave1.setIdBanco(banco1);
             usuarioChave1.setIdChave(chaves1);
             usuarioChave1.setChave("12222222201");
-            usuarioChave1.setStatusEnvio(true);
+            usuarioChave1.isStatusChave();
             usuarioChaveRepository.save(usuarioChave1);
 
             //TRANSACAO

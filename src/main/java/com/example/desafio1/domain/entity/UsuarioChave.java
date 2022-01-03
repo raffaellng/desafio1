@@ -33,8 +33,9 @@ public class UsuarioChave {
     private Chaves idChave;
 
     private String chave;
-    private boolean statusEnvio;
-    private String erroEnvio;
+
+    private boolean statusChave = true; //Verifica se a chave está ativa
+
     private LocalDateTime dataEnvio;
 
     @PrePersist

@@ -38,7 +38,7 @@ CREATE TABLE Usuario_Chave(
     IdBanco INTEGER REFERENCES Banco(Id),
     IdChaves INTEGER REFERENCES Chaves(Id),
     Chave VARCHAR (100),
-    Status bit,
+    StatusChave bit,
     DataCriacao TIMESTAMP
 );
 
@@ -46,6 +46,7 @@ CREATE TABLE Transacoes(
     Id INTEGER PRIMARY KEY,
     ChaveTrasacao VARCHAR(MAX),
     Valor integer (8),
+    Observacao VARCHAR (250),
     DataTransacao TIMESTAMP,
     UsuarioOrigem INTEGER REFERENCES Usuario_Chave(id),
     UsuarioDestino INTEGER REFERENCES Usuario_Chave(id)
