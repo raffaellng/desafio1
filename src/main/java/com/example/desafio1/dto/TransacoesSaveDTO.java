@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TransacoesDTO {
+public class TransacoesGetDTO {
     private int id;
     private UUID chaveTransacao;
     private BigDecimal valor;
