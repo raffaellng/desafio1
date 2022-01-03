@@ -24,5 +24,4 @@ public class BancoDTO {
     private boolean status;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAlteracao;
-
 }
