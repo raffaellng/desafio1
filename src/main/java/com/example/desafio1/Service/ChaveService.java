@@ -14,7 +14,6 @@ public class ChaveService implements ChavesInterace {
 
     ChavesRepository chavesRepository;
 
-    @Override
     public List<Chaves> findByChaves() {
         return this.chavesRepository.findAll();
     }
