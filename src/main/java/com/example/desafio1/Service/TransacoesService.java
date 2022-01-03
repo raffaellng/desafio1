@@ -47,7 +47,7 @@ public class TransacoesService implements TransacoesInterface {
         Banco userDestino = bancoRepository.findById(existeChaveDestino.getIdCliente().getId())
                 .orElseThrow(() -> new RegraNegocioExceptions("Usuario destino não existe"));
 
-        if (Objects.equals(existeChaveDestino.getIdChave().getTipoChave(), enviarTransacao.getTipoChave()))
+        if (!Objects.equals(existeChaveDestino.getIdChave().getTipoChave(), enviarTransacao.getTipoChave()))
             throw new RegraNegocioExceptions("A chave nao corresponde ao tipo selecionado");
 
         if (existeChaveOrigem == null || !existeChaveOrigem.isStatusChave())
@@ -59,7 +59,7 @@ public class TransacoesService implements TransacoesInterface {
         if (userOrigem.getSaldo().intValue() < enviarTransacao.getValor().intValue())
             throw new RegraNegocioExceptions("Sem saldo suficiente");
 
-        userOrigem.setSaldo(userOrigem.getSaldo().min(enviarTransacao.getValor()));
+        userOrigem.setSaldo(userOrigem.getSaldo().subtract(enviarTransacao.getValor()));
         SalvarSaldo(userOrigem);
 
         userDestino.setSaldo(userDestino.getSaldo().add(enviarTransacao.getValor()));
@@ -151,6 +151,4 @@ public class TransacoesService implements TransacoesInterface {
                 .email(cliente.getEmail())
                 .build();
     }
-
-
 }
