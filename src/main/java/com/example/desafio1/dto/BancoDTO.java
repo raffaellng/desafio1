@@ -15,14 +15,14 @@ import java.time.LocalDateTime;
 public class BancoDTO {
 
     private String instituicao;
-//    private String tipoConta;
+    private String tipoConta;
     private int agencia;
     private int conta;
-//    private BigDecimal saldo;
-//    private String usuario;
-//    private String senha;
-//    private boolean status;
-//    private LocalDateTime dataCriacao;
-//    private LocalDateTime dataAlteracao;
+    private BigDecimal saldo;
+    private String usuario;
+    private String senha;
+    private boolean status;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataAlteracao;
 
 }
