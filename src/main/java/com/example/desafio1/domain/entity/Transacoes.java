@@ -30,7 +30,6 @@ public class Transacoes {
     @JoinColumn(name = "UsuarioChaveOrigem")
     private UsuarioChave usuarioOrigem;
 
-
     @ManyToOne
     @JoinColumn(name = "UsuarioChaveDestino")
     private UsuarioChave usuarioDestino;

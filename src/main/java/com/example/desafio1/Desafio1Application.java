@@ -1,7 +1,7 @@
 package com.example.desafio1;
 
 import com.example.desafio1.domain.entity.*;
-import com.example.desafio1.domain.repository.*;
+import com.example.desafio1.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -100,7 +100,7 @@ public class Desafio1Application {
             usuarioChave.setIdBanco(banco);
             usuarioChave.setIdChave(chaves4);
             usuarioChave.setChave("34996399990");
-            usuarioChave.setStatus(true);
+            usuarioChave.setStatusEnvio(true);
             usuarioChaveRepository.save(usuarioChave);
 
             UsuarioChave usuarioChave1 = new UsuarioChave();
@@ -108,7 +108,7 @@ public class Desafio1Application {
             usuarioChave1.setIdBanco(banco1);
             usuarioChave1.setIdChave(chaves1);
             usuarioChave1.setChave("12222222201");
-            usuarioChave1.setStatus(true);
+            usuarioChave1.setStatusEnvio(true);
             usuarioChaveRepository.save(usuarioChave1);
 
             //TRANSACAO

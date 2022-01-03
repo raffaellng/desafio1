@@ -1,7 +1,7 @@
 package com.example.desafio1.controller;
 
 import com.example.desafio1.domain.entity.Cliente;
-import com.example.desafio1.domain.repository.ClientesRepository;
+import com.example.desafio1.repository.ClientesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

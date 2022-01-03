@@ -1,7 +1,7 @@
 package com.example.desafio1.controller;
 
 import com.example.desafio1.domain.entity.Banco;
-import com.example.desafio1.domain.repository.BancoRepository;
+import com.example.desafio1.repository.BancoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
