@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ClientesRepository extends JpaRepository<Cliente, Integer> {
 
-
     Optional<Cliente> findByIdAndStatusTrue(Integer integer);
 }
